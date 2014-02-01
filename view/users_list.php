@@ -66,7 +66,9 @@ $usersListController->invoke();
                             
                             <tr colspan="2" align="center">
                                 <td>
-                                    <input type="submit" value="Save"/>
+                                    <input id="saveButton" type="submit" value="Save"/>
+                                    <input id="updateButton" type="submit" value="Update"/>
+                                    <input id="cancelUpdateButton" type="submit" value="Save"/>
                                 </td>
                             </tr>
                         </table>

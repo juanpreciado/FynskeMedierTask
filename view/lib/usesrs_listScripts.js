@@ -12,34 +12,42 @@
 //
 //});
 
+$(document).ready(
+        function() {
+            $("#updateButton").hide();
+            $("#cancelUpdateButton").hide();
+        }
+);
 
-
-    function updateUser(value) {              
-        $.ajax({
-            type: 'POST',
-            url: "../view/users_list_dispatcher.php",
-            data: "userName="+value,
-            success: function(response){
-              var data = $.parseJSON(response);
+function updateUser(value) {
+    $("#updateButton").show();
+    $("#cancelUpdateButton").show();
+    $("#saveButton").hide();
+    $.ajax({
+        type: 'POST',
+        url: "../view/users_list_dispatcher.php",
+        data: "userName=" + value,
+        success: function(response) {
+            var data = $.parseJSON(response);
 //               $("#testDiv").html("");
-                $("#testDiv").append(data);
-                alert(data.username);
-                
-                $("#usernameinput").val(data.username);
-                $("#usernameinput").prop( "disabled", true );
-                $("#passwordinput").prop( "disabled", true );
-                $("#password2input").prop( "disabled", true );
-                $("#firstnameinput").val(data.firstname);
-                $("#lastnameinput").val(data.lastname);
-                $("#emailinput").val(data.email);
-            },
-            error: function(){
-                alert("error");
-            }
-                    
-        });
+            $("#testDiv").append(data);
+            alert(data.username);
 
-    }
+            $("#usernameinput").val(data.username);
+            $("#usernameinput").prop("disabled", true);
+            $("#passwordinput").prop("disabled", true);
+            $("#password2input").prop("disabled", true);
+            $("#firstnameinput").val(data.firstname);
+            $("#lastnameinput").val(data.lastname);
+            $("#emailinput").val(data.email);
+        },
+        error: function() {
+            alert("error");
+        }
+
+    });
+
+}
 
 
 
