@@ -38,6 +38,21 @@ if( isset($_POST['action']) ){
         echo $result;
     }
     
+    if( $action == "select" ){
+        $username = $_POST['userName'];
+
+        $userListController = new UsersListController();
+        $user = new User();
+        $user = $userListController->selectUser($username);
+        $data = array(
+            "username" => $user->getUserName(),
+            "firstname" => $user->getFirstName(),
+            "lastname" => $user->getLastName(),
+            "email" => $user->getEmail()
+        );
+        echo json_encode($data);
+    }
+    
 }
 
 

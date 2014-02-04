@@ -26,7 +26,7 @@ function selectUserForUpdating(value) {
     $.ajax({
         type: 'POST',
         url: "../view/users_list_dispatcher.php",
-        data: "userName=" + value,
+        data: "action=select&userName=" + value,
         success: function(response) {
             var data = $.parseJSON(response);
 //               $("#testDiv").html("");
@@ -40,6 +40,10 @@ function selectUserForUpdating(value) {
             $("#firstnameinput").val(data.firstname);
             $("#lastnameinput").val(data.lastname);
             $("#emailinput").val(data.email);
+            
+            $("#saveButton").hide();
+            $("#updateButton").show();
+            $("#cancelUpdateButton").show();
         },
         error: function() {
             alert("error");
@@ -76,10 +80,16 @@ function updateUser() {
         url: "../view/users_list_dispatcher.php",
         data: "action=update&userName=" + $("#usernameinput").val()
                 + "&password=" + $("#passwordinput").val() + "&firstName=" + $("#firstnameinput").val()
-                + "$lastName=" + $("#lastnameinput").val() + "&email=" + $("#emailinput").val(),
+                + "&lastName=" + $("#lastnameinput").val() + "&email=" + $("#emailinput").val(),
         success: function(response) {
-            $("#testDiv").html("");
-            $("#testDiv").append(response);
+            if (response == 1 || response == "1") {
+                $("#successMessageDiv").show();
+                $('#formUsers').each(function() {
+                    this.reset();
+                });
+            } else {
+                $("#failureMessageDiv").show();
+            }
         }
     }
 

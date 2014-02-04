@@ -49,8 +49,8 @@ class UsersListController {
         $user->setFirstName($firstName);
         $user->setLastName($lastName);
         $user->setEmail($email);
-        $user->updateUser();
-        return $user->getUserId();
+        $result = $user->updateUser();
+        return $result;
     }
     
     public function selectUser($userName){
