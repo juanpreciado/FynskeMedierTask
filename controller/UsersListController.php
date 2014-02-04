@@ -38,7 +38,19 @@ class UsersListController {
         $user->setFirstName($firstName);
         $user->setLastName($lastName);
         $user->setEmail($email);
-        $user->saveUser();
+        $result = $user->saveUser();
+        return $result;
+    }
+    
+    function updateUser($userName, $password, $firstName, $lastName,$email){
+        $user = new User();
+        $user->setUserName($userName);
+        $user->setPassword($password);
+        $user->setFirstName($firstName);
+        $user->setLastName($lastName);
+        $user->setEmail($email);
+        $user->updateUser();
+        return $user->getUserId();
     }
     
     public function selectUser($userName){

@@ -64,7 +64,25 @@ class UsersListDAO extends Database{
         $sql = "INSERT INTO users_table ( userName_varchar, password_varchar, first_name_varchar, "
                 . "last_name_varchar, email_varchar, role_code_fk ) VALUES ('$userName', '$password', '$firstName', '$lastName', '$email', 1);";
         $this->connect();
-        $this->query($sql);
+        $result = $this->query($sql);
         $this->disconnect();
-    }   
+        return $result;
+    }
+    
+    public function updateUser(User $user){
+       
+        $sql = "UPDATE users_table set "
+                . "password_varchar = '".$user->getPassword()."',"
+                . "first_name_varchar = '".$user->getFirstName()."',"
+                . "last_name_varchar = '".$user->getLastName()."',"
+                . "email_varchar = '".$user->getEmail()."'"
+                ." where userName_varchar = '".$user->getUserName()."'"
+                ." returning userCode_bigint;";
+        $this->connect();
+        $userCode = 0;
+        $userCode = $this->query($sql);
+        $this->disconnect();
+        return $userCode;
+                
+    }
 }

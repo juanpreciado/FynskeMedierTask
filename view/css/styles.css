@@ -3,6 +3,16 @@ html{
     height: 100%;
 }
 
+.successMessageDiv{
+    background-color: green;
+    color: white;
+}
+
+.failureMessageDiv{
+    background-color: red;
+    color: white;
+}
+
 .content{
     background-color: white;
     margin:0 auto 0 auto; 

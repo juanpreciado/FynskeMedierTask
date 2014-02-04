@@ -19,7 +19,7 @@ $(document).ready(
         }
 );
 
-function updateUser(value) {
+function selectUserForUpdating(value) {
     $("#updateButton").show();
     $("#cancelUpdateButton").show();
     $("#saveButton").hide();
@@ -49,5 +49,45 @@ function updateUser(value) {
 
 }
 
+function saveUser() {
+    $.ajax({
+        type: 'POST',
+        url: "../view/users_list_dispatcher.php",
+        data: "action=save&userName=" + $("#usernameinput").val()
+                + "&password=" + $("#passwordinput").val() + "&firstName=" + $("#firstnameinput").val()
+                + "&lastName=" + $("#lastnameinput").val() + "&email=" + $("#emailinput").val(),
+        success: function(response) {
+            if (response == 1 || response == "1") {
+                $("#successMessageDiv").show();
+                $('#formUsers').each(function() {
+                    this.reset();
+                });
+            } else {
+                $("#failureMessageDiv").show();
+            }
+        }
+    }
+
+    );
+}
+function updateUser() {
+    $.ajax({
+        type: 'POST',
+        url: "../view/users_list_dispatcher.php",
+        data: "action=update&userName=" + $("#usernameinput").val()
+                + "&password=" + $("#passwordinput").val() + "&firstName=" + $("#firstnameinput").val()
+                + "$lastName=" + $("#lastnameinput").val() + "&email=" + $("#emailinput").val(),
+        success: function(response) {
+            $("#testDiv").html("");
+            $("#testDiv").append(response);
+        }
+    }
+
+    );
+}
+
+function cancelUpdating() {
+
+}
 
 

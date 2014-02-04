@@ -15,13 +15,10 @@ $usersListController->invoke();
     <head>
         <meta charset="UTF-8">
         <title>Users CRUD</title>
-        <link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />
-        <script type="text/javascript" src="lib/usesrs_listScripts.js"></script>
+        <link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />      
         <script type="text/javascript" src="lib/jquery.js"></script>
         <script type="text/javascript" src="lib/jquery.dataTables.js"></script>
-        <script type="text/javascript" charset="utf-8">
-            
-        </script>
+        <script type="text/javascript" src="lib/usesrs_listScripts.js"></script>
     </head>
     <body>
         <div class="small-header"><STRONG><a href="logout.php">LOGOUT</a></STRONG></div>
@@ -29,9 +26,15 @@ $usersListController->invoke();
             <center><h1>Users CRUD</h1></center>
             <center><h3>Developed as a part of Fynske Medier selection process</h3></center>
         </header>
-        <div class="content"> 
+        <div class="content">
+            <div id="successMessageDiv" class="successMessageDiv" style="display: none">
+                The user has been recorded succesfully!!!
+            </div>
+            <div id="failureMessageDiv" class="failureMessageDiv" style="display: none">
+               There was a problem saving the data
+            </div>
             <div id="testDiv"></div>
-            <form action="" method="POST">
+            <form id="formUsers" action="" method="POST">
             <center>
                 
                 <div class="addNewUser">
@@ -66,9 +69,9 @@ $usersListController->invoke();
                             
                             <tr colspan="2" align="center">
                                 <td>
-                                    <input id="saveButton" type="submit" value="Save"/>
-                                    <input id="updateButton" type="submit" value="Update"/>
-                                    <input id="cancelUpdateButton" type="submit" value="Save"/>
+                                    <input id="saveButton" type="button" value="Save" onclick="saveUser();" />
+                                    <input id="updateButton" type="button" value="Update" onclick="updateUser();"/>
+                                    <input id="cancelUpdateButton" type="button" value="Save" onclick="cancelUpdating();" />
                                 </td>
                             </tr>
                         </table>
@@ -93,7 +96,7 @@ $usersListController->invoke();
                                 <td> <?php echo $u->getFirstName() ?> </td>
                                 <td> <?php echo $u->getLastName() ?> </td>
                                 <td> <?php echo $u->getEmail() ?> </td>
-                                <td> <input type="button" value="<?php echo $u->getUserName() ?>" onclick="updateUser('<?php echo $u->getUserName() ?>');" </td>
+                                <td> <input type="button" value="<?php echo $u->getUserName() ?>" onclick="selectUserForUpdating('<?php echo $u->getUserName() ?>');" </td>
                             </tr>
                         <?php endforeach; ?>
 

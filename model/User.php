@@ -14,7 +14,7 @@
 require 'UsersListDAO.php';
 
 class User {
-
+    private $userId;
     private $userName;
     private $password;
     private $firstName;
@@ -24,7 +24,14 @@ class User {
 
     public function saveUser() {
         $userDAO = new UsersListDAO();
-        $userDAO->saveUser($this->userName, $this->password, $this->firstName, $this->lastName, $this->email);
+        $result = $userDAO->saveUser($this->userName, $this->password, $this->firstName, $this->lastName, $this->email);
+        return $result;
+    }
+    
+    public function updateUser(){
+        $userDAO = new UsersListDAO();
+        $code = $userDAO->updateUser($this);
+        $this->setUserId($code);
     }
 
     public function selectUser($userName) {
@@ -84,6 +91,14 @@ class User {
 
     public function setRole($role) {
         $this->role = $role;
+    }
+    
+    public function getUserId() {
+        return $this->userId;
+    }
+
+    public function setUserId($userId) {
+        $this->userId = $userId;
     }
 
 }
